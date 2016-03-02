@@ -30,7 +30,7 @@ dependencies {
 
 docker {
   url = 'https://192.168.99.100:2376'
-  certPath = new File(System.properties['user.home'], '.docker/machine/machines/docker0')
+  certPath = new File(System.properties['user.home'], '.docker/machine/machines/dkr-dev')
 }
 
 jar {
@@ -55,7 +55,7 @@ task copyWebapp(type: Copy) {
   into('build/docker')
 }
 
-task buildImage(type: DockerBuildImage) {
+task buildDockerImage(type: DockerBuildImage) {
   dependsOn createDockerfile, copyWebapp
   inputDir = createDockerfile.destFile.parentFile
   tag = 'xebialabs/rest-o-rant-api'
