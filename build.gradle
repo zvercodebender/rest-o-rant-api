@@ -24,6 +24,8 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+version =  '0.1.0'
+
 dependencies {
   compile("org.springframework.boot:spring-boot-starter-web")
 }
@@ -35,7 +37,6 @@ docker {
 
 jar {
   baseName = 'rest-o-rant-api'
-  version =  '0.1.0'
 }
 
 task createDockerfile(type: Dockerfile) {
@@ -58,7 +59,7 @@ task copyWebapp(type: Copy) {
 task buildDockerImage(type: DockerBuildImage) {
   dependsOn createDockerfile, copyWebapp
   inputDir = createDockerfile.destFile.parentFile
-  tag = 'dkr-reg:5000/rest-o-rant-api'
+  tag = "dkr-reg:5000/rest-o-rant-api:$version"
 }
 
 task wrapper(type: Wrapper) {
