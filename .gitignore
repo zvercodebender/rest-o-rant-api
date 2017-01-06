@@ -1,4 +1,30 @@
-build
-.gradle
-.idea
+# use glob syntax.
+syntax: glob
+.gradle/
+
+
+# Build output
+build/
+out/
+target/
+bin/
+# Maven
+pom.xml
+
+# Eclipse
+.metadata/
+.settings/
+.classpath
+.project
+.pydevproject
+
+# IntelliJ
+.idea/
 *.iml
+*.ipr
+*.iws
+*.log
+s101plugin.state
+
+#Mac
+.DS_Store
