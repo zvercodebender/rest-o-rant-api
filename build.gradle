@@ -49,14 +49,14 @@ task createDockerfile(type: Dockerfile) {
   from 'java:8'
   maintainer 'Vincent Partington <vpartington@xebialabs.com>'
   exposePort(8080)
-  addFile("*.jar", "app.jar")
-  entryPoint("java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar")
+  addFile("*.war", "app.war")
+  entryPoint("java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.war")
 }
 
 task copyWebapp(type: Copy) {
   dependsOn build
   from('build/libs') {
-    include "**/*.jar"
+    include "**/*.war"
   }
   into('build/docker')
 }
