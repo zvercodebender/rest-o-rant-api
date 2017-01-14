@@ -16,6 +16,6 @@ node {
       xldPublishPackage serverCredentials: 'Admin', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
     }
     stage('Deploy') {
-      xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/rest-o-rant-api/$BUILD_NUMBER.0/rest-o-rant-api',
+      xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/rest-o-rant-api/$BUILD_NUMBER.0'
     }
 }
