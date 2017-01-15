@@ -3,7 +3,7 @@
     <application />
     <orchestrator />
     <deployables>
-        <tomcat.War name="/rest-o-rent-api" file="/libs/rest-o-rant-api.war">
+        <tomcat.War name="/rest-o-rant-api" file="/libs/rest-o-rant-api.war">
             <tags />
             <scanPlaceholders>false</scanPlaceholders>
         </tomcat.War>
