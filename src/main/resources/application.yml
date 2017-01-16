@@ -1,8 +1,6 @@
  server:
-    contextPath: /rest-o-rent-api
+    contextPath: /rest-o-rant-api
 
  spring:
      datasource:
-        url: jdbc:mysql://10.10.33.113:3306/restaurant?useSSL=false
-        username: user
-        password: password
+        jndi-name: jdbc/RestorantDB
