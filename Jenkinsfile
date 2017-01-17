@@ -18,4 +18,7 @@ node {
     stage('Deploy') {
       xldDeploy serverCredentials: 'Admin', environmentId: 'Environments/Dev', packageId: 'Applications/rest-o-rant-api/$BUILD_NUMBER.0'
     }
+    stage('Start XLR Release') {
+       xlrCreateRelease serverCredentials: 'Admin', template: 'Release rest-o-rant-api', version: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
+    }
 }
