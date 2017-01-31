@@ -1,2 +1,2 @@
- server:
-    contextPath: /rest-o-rent-api
+server:
+    contextPath: /rest-o-rant-api

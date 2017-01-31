@@ -15,3 +15,12 @@
 1. Open `http://<DOCKER>:<PORT>/`.
 1. See the restaurant main page.
 1. Click the Search button.
+
+# To run with Db
+
+1. Add a file setenv.sh to tomcat/bin directory and append the following - JAVA_OPTS="$JAVA_OPTS -Dspring.profiles.active=withDb”
+2. Add the jndi-lookup config to conf/context.xml of tomcat server.
+
+# To run without Db
+
+  None of the configurations mentioned above are necessary.
