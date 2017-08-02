@@ -21,4 +21,9 @@ public class RestaurantSearchController {
     return restaurantService.getAllRestaurants(q);
   }
 
+  @RequestMapping(value = "/ping", method = RequestMethod.GET)
+  public String ping() {
+    return "OK";
+  }
+
 }

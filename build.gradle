@@ -40,8 +40,18 @@ dependencies {
 }
 
 docker {
-  url = 'https://192.168.99.100:2376'
-  certPath = new File(System.properties['user.home'], '.docker/machine/machines/dkr-dev')
+   url = System.properties['docker.client.url']
+   if (System.properties['docker.native'] == "false") {
+        certPath=new File(System.properties['docker.cert.path'])
+   }
+   if (System.properties['docker.remote_registry'] == "true") {
+     registryCredentials {
+         url = System.properties['docker.client.url']
+         username = System.properties['docker.registry.username']
+         password = System.properties['docker.registry.password']
+         email = System.properties['docker.registry.email']
+     }
+   }
 }
 
 jar {
@@ -72,7 +82,7 @@ task copyWebapp(type: Copy) {
 task buildDockerImage(type: DockerBuildImage) {
   dependsOn createDockerfile, copyWebapp
   inputDir = createDockerfile.destFile.parentFile
-  tag = "dkr-reg:5000/rest-o-rant-api:$version"
+  tag = System.properties['docker.repository']+"/rest-o-rant-api:$version"
 }
 
 task wrapper(type: Wrapper) {
