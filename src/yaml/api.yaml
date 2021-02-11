@@ -1,0 +1,21 @@
+---
+apiVersion: xl-deploy/v1
+kind: Applications
+spec:
+- name: !format Applications/as-code-meetup/rest-o-rant-yaml/rest-o-rant-api/%version%
+  type: udm.DeploymentPackage
+  deployables:
+  - name: rest-o-rant-api
+    type: k8s.ResourcesFile
+    fileEncodings:
+      ".+\\.properties": ISO-8859-1
+    mergePatchType: strategic
+    propagationPolicy: Foreground
+    updateMethod: patch
+    createOrder: "60"
+    modifyOrder: "50"
+    destroyOrder: "40"
+    displayResourceOnLogs: "false"
+    showContainerLogs: "false"
+    bytesToReadFromContainerLogs: "4000"
+    file: !file "artifacts/rest-o-rant-api.yaml"

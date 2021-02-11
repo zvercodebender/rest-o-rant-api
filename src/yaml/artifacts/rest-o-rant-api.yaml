@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-rest-o-rant-api
+  name: rest-o-rant-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-rest-o-rant-api
+  template:
+    metadata:
+      labels:
+        app: deployment-rest-o-rant-api
+    spec:
+      containers:
+      - image: xebialabsunsupported/rest-o-rant-api:{{VERSION}}
+        name: rest-o-rant-api
+        ports:
+        - containerPort: 8080
+          name: apiport
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1
+            memory: "128Mi"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-o-rant-api
+spec:
+  ports:
+  - name: apiport
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: deployment-rest-o-rant-api
+  sessionAffinity: None
+  type: ClusterIP
