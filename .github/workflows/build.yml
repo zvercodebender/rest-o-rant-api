@@ -1,0 +1,35 @@
+name: Build-rest-o-rant-api
+on:
+  push:
+jobs:
+  rest-o-rant-api-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: zvercodebender/rest-o-rant-api  # The repository to scan.
+          releases-only: false  # We know that all relevant tags have a GitHub release for them.
+        id: tagkit  # The step ID to refer to later.
+
+      - run: echo "rest-o-rant-api is at version ${{ steps.tagkit.outputs.tag }}"
+      - uses: actions/checkout@v2
+      - name: build
+        env:
+          VERSION: ${{ steps.tagkit.outputs.tag }}
+          GET_LOCAL: "N"
+        run: ./build.sh
+      - name: push-to-docker
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          VERSION: ${{ steps.tagkit.outputs.tag }}
+          GET_LOCAL: "N"
+        run: ./push_to_docker.sh
+      - name: deploy-package
+        env:
+          XLD_USER: ${{ secrets.XLD_USER }}
+          XLD_PASSWD: ${{ secrets.XLD_PASSWD }}
+          XLD_URL: "http://xld.rbroker.linkpc.net"
+          VERSION: ${{ steps.tagkit.outputs.tag }}
+          GET_LOCAL: "N"
+        run: ./deploy_package.sh
