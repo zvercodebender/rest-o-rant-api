@@ -15,17 +15,12 @@ spec:
         app: deployment-rest-o-rant-api
     spec:
       containers:
-      - image: xebialabsunsupported/rest-o-rant-api:{{VERSION}}
+      - image: rbroker/rest-o-rant-api:{{VERSION}}
         name: rest-o-rant-api
         ports:
         - containerPort: 8080
           name: apiport
           protocol: TCP
-        resources:
-          limits:
-            cpu: 1
-            memory: "128Mi"
-
 
 ---
 apiVersion: v1

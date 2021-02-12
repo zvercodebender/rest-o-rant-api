@@ -13,7 +13,7 @@ sed "s/{{VERSION}}/${VERSION}/g" src/yaml/artifacts/rest-o-rant-api.yaml > build
 cd build/yaml
 if [ -z "${GET_LOCAL}" ]
 then
-  xl apply --file web.yaml --values version=$VERSION
+  xl apply --file api.yaml --values version=$VERSION
 else
   curl -LO https://dist.xebialabs.com/public/xl-cli/$CLI_VERSION/linux-amd64/xl
   chmod +x xl
